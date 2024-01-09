@@ -1,3 +1,1 @@
-# git_rules-public
-This is public repo for protection rules
-Updating file in features branch 
+This is to resolved merge conficts between main and features branches
