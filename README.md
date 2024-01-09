@@ -1,3 +1,1 @@
-# git_rules-public
-This is public repo for protection rules
-To check protection rule
+This is to resolved merge conficts between main and features branches
