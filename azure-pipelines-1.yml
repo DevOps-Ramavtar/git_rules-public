@@ -1,7 +1,7 @@
 resources:
   webhooks:
-    - webhook: WebHook
-      connection: IncomingWH
+    - webhook: GHWebHook
+      connection: GHWebHookConnection
 
 steps:  
 - script: echo ${{ parameters.WebHook.resource.message.title }}
