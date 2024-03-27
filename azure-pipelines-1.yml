@@ -2,6 +2,15 @@ resources:
   webhooks:
     - webhook: GHWebHook
       connection: GHWebHookConnection
-
-steps:  
-- script: echo ${{ parameters.GHWebHook.resource.message.title }}
+      filters:
+        - path: repositoryName
+          value: git_rules-public
+        - path: action
+          value: CREATED
+steps:
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      Write-Host ${{ parameters.GHWebHook.repositoryName}}
+      Write-Host ${{ parameters.GHWebHook.component.group}}
