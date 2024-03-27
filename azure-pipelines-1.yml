@@ -4,4 +4,4 @@ resources:
       connection: GHWebHookConnection
 
 steps:  
-- script: echo ${{ parameters.WebHook.resource.message.title }}
+- script: echo ${{ parameters.GHWebHook.resource.message.title }}
