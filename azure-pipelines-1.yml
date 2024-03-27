@@ -14,3 +14,5 @@ steps:
     script: |
       Write-Host ${{ parameters.GHWebHook.repositoryName}}
       Write-Host ${{ parameters.GHWebHook.component.group}}
+      script: echo ${{ parameters.GHWebHook.repositoryName}}
+      script: echo ${{ parameters.GHWebHook.component.group}}
