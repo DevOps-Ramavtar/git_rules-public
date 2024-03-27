@@ -1,18 +1,31 @@
+trigger: none
+pr: none
+
 resources:
   webhooks:
-    - webhook: GHWebHook
-      connection: GHWebHookConnection
-      filters:
-        - path: repositoryName
-          value: git_rules-public
-        - path: action
-          value: CREATED
-steps:
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: |
-      Write-Host ${{ parameters.GHWebHook.repositoryName}}
-      Write-Host ${{ parameters.GHWebHook.component.group}}
-      script: echo ${{ parameters.GHWebHook.repositoryName}}
-      script: echo ${{ parameters.GHWebHook.component.group}}
+    - webhook: MyWebHookName
+      connection: MyServiceConnectionName
+
+# This stage is triggered when the pipeline is invoked by webhook
+stages:
+- stage: WebHookApproval
+  displayName: Webhook Approval
+  jobs:
+  - job: Approval
+    pool: server
+    steps:
+      - task: ManualValidation@0
+        displayName: Validates trigger
+        timeoutInMinutes: 2880
+        inputs:
+          notifyUsers: ramavtar.meena@gmail.com.com
+          instructions: 'Please validate the webhook call and resume it.'
+
+- stage: Build
+  displayName: Build a container image
+  jobs:
+  - job: Build_job
+    steps:
+      - bash: |
+          echo "Downloading version: ${{ parameters.MyWebHookName.resource.message.version }}"
+          curl -O ${{ parameters.MyWebHookName.resource.message.url }}
